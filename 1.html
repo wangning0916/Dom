@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<ul>
+		<li>hello 1</li>
+		<li>hello 2</li>
+		<li>hello 3</li>
+		<li>hello 4</li>
+		<li>hello 5</li>
+	</ul>
+
+	<div>
+		<p>
+			<span>span标签1</span>
+			<a href="javascript:void(0)" id="link">获取父节点</a>
+			<span>span标签2</span>
+		</p>
+	</div>
+</body>
+</html>
+<script type="text/javascript">
+	window.onload = function(){
+		// 子节点
+		var lis = document.getElementsByTagName("ul")[0].childNodes;
+		//11个节点，包括6个空白节点
+		console.log(lis.length)
+		for(var i=0;i<lis.length;i++){
+			//元素节点
+			if(lis[i].nodeType == 1){
+				console.log(lis[i].innerHTML)
+			}
+		}
+
+
+		//父节点，父节点只能有一个
+		var parent = document.getElementById("link").parentNode;
+		console.log("父节点：" + parent.innerHTML);
+		var grandparent = document.getElementById("link").parentNode.parentNode;
+		console.log("祖父节点：" + grandparent.innerHTML);
+
+
+		// 兄弟节点
+		var next = document.getElementById("link").nextSibling;
+		
+		//会产生空白的文本节点,如果不是元素节点，继续找下一个
+		if(next.nodeType != 1){
+			next = next.nextSibling;
+			console.log("兄弟节点1：" + next.innerHTML);
+		}
+		
+		//会产生空白的文本节点,如果不是元素节点，继续找上一个
+		var prev = document.getElementById("link").previousSibling;
+		if(prev.nodeType != 1){
+			prev = prev.previousSibling;
+			console.log("兄弟节点2：" + prev.innerHTML);
+		}
+
+	}
+</script>
