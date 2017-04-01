@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<!-- 插入节点 -->
+	<div id="demo"></div>
+
+	<!-- insertBefore -->
+	<div id="wrap2">
+		<p id="current">这是一个子节点</p>
+	</div>
+
+	<!-- removeChild -->
+	<div id="wrap3">
+		<p>留下的节点</p>
+		<p id="remove">需要被删除的节点</p>
+	</div>
+
+	<!-- replaceChild -->
+	<h1 id="oldnode">需要被替换的节点</h1>
+	<a href="javascript:void(0)" onclick="replace()">点击替换节点</a>
+</body>
+</html>
+<script type="text/javascript">
+	window.onload = function(){
+
+		var wrap = document.getElementById("demo");
+		var newNode = document.createElement("p");
+		newNode.innerHTML = "hello world";
+		wrap.appendChild(newNode);
+		
+		var wrap2 = document.getElementById("wrap2");
+		var current = document.getElementById("current");
+		var newNode = document.createElement("p");
+		newNode.innerHTML = "这是新插入的子节点";
+		wrap2.insertBefore(newNode,current);
+
+		var wrap3 = document.getElementById("wrap3");
+		var remove = document.getElementById("remove");
+		var text = wrap3.removeChild(remove);
+		// 删除成功后，返回被删除的节点
+		console.log(text.innerHTML);
+	}
+
+	function replace(){
+		var newNode = document.createElement("p");
+		var textNode = document.createTextNode("替换之后的节点");
+		newNode.appendChild(textNode);
+		var oldNode = document.getElementById("oldnode");
+		console.log(oldNode.parentNode.innerHTML);
+		oldNode.parentNode.replaceChild(newNode,oldNode);
+	}
+</script>
